@@ -9,6 +9,6 @@ OAUTH_TOKEN_SECRET = 'q29nXjEHHDAV3Dl49GGrOH6PmffFKCYzcOS1dt5S7oJ9s'
 auth = twitter.oauth.OAuth(OAUTH_TOKEN, OAUTH_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
 twitter_api = twitter.Twitter(auth=auth)
 
-search_results = twitter_api.search.tweets(q = 'hillary clinton', count = 2500, lang='en', result_type = 'recent')
+search_results = twitter_api.search.tweets(q = 'hillary clinton since:2015-12-16', lang='en') #geocode='37.87222, -91.21527778, 2157km'
 
-print json.dumps(search_results, indent = 5)
+print json.dumps(search_results) 
