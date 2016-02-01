@@ -60,7 +60,7 @@ for tweet_file in tweet_files:
   break
 
 # Print parsed tweets
-print 'Total tweets found is ' + str(len(all_clinton_tweets))
+print 'Total clinton tweets found is ' + str(len(all_clinton_tweets))
 
 # Tweets summarized by state
 clinton_tweets_per_state = [0] * 50
@@ -71,8 +71,7 @@ for count in range(0, len(all_clinton_tweets)):
 
 # Print results by state
 for count in range(0, len(clinton_tweets_per_state)):
-  if clinton_tweets_per_state[count] > 0:
-    print UsaStatesCheck.state_names[count] + ' ' + str(clinton_tweets_per_state[count])
+  print UsaStatesCheck.state_names[count] + '\t' + str(clinton_tweets_per_state[count])
 
 ###############################################################################################################################
 
@@ -120,7 +119,7 @@ for tweet_file in tweet_files:
   break
 
 # Print parsed tweets
-print 'Total tweets found is ' + str(len(all_trump_tweets))
+print 'Total trump tweets found is ' + str(len(all_trump_tweets))
 
 # Tweets summarized by state
 trump_tweets_per_state = [0] * 50
@@ -131,6 +130,5 @@ for count in range(0, len(all_trump_tweets)):
 
 # Print results by state
 for count in range(0, len(trump_tweets_per_state)):
-  if trump_tweets_per_state[count] > 0:
-    print UsaStatesCheck.state_names[count] + ' ' + str(trump_tweets_per_state[count])
+  print UsaStatesCheck.state_names[count] + '\t' + str(trump_tweets_per_state[count])
 

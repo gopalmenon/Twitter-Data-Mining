@@ -4,7 +4,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   </head>
   <body>
-    <div id="map_canvas" style="display: block; height: 600px;">
+    <div id="map_canvas" style="display: block; height: 750px;">
     </div>
 <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script>
@@ -17,7 +17,13 @@
   map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
   jQuery.get("states.xml", {}, function(data) {
     jQuery(data).find("state").each(function() {
-      var colour = this.getAttribute('colour');
+
+    var state_names =  ['alabama','alaska','arizona','arkansas','california','colorado','connecticut','delaware','florida','georgia','hawaii','idaho','illinois','indiana','iowa','kansas','kentucky','louisiana','maine','maryland','massachusetts','michigan','minnesota','mississippi','missouri','montana','nebraska','nevada','new hampshire','new jersey','new mexico','new york','north carolina','north dakota','ohio','oklahoma','oregon','pennsylvania','rhode island','south carolina','south dakota','tennessee','texas','utah','vermont','virginia','washington','west virginia','wisconsin','wyoming'];
+
+    var stateColors = [ 'red',  'red',  'blue',  'blue',  'blue',  'blue',  'blue',  'red',  'red',  'red',  'blue',  'blue',  'blue',  'red',  'blue',  'blue',  'red',  'red',  'red',  'red',  'red',  'blue',  'blue',  'blue',  'blue',  'blue',  'blue',  'blue',  'red',  'red',  'blue',  'blue',  'red',  'red',  'red',  'red',  'blue',  'blue',  'blue',  'red',  'red',  'red',  'red',  'red',  'red',  'red',  'blue',  'white',  'red',  'white'];
+
+      var stateIndex = state_names.indexOf(this.getAttribute('name').toLowerCase());
+      var colour = stateColors[stateIndex];
       var points = this.getElementsByTagName("point");
       var pts = [];
       for (var i = 0; i < points.length; i++) {
