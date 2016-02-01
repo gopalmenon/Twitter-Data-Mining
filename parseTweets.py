@@ -1,10 +1,14 @@
 import json
+import MonthNumber
 import UsaStatesCheck
 
+from datetime import date
 from os import listdir
 from os.path import isfile, join
 
 TWEETS_TO_COLLECT = 2500
+
+last_election_results = ['red', 'red', 'red', 'red', 'blue', 'blue', 'blue', 'blue', 'blue', 'red', 'blue', 'red', 'blue', 'red', 'blue', 'red', 'red', 'red', 'blue', 'blue', 'blue', 'blue', 'blue', 'red', 'red', 'red', 'red', 'blue', 'blue', 'blue', 'blue', 'blue', 'red', 'red', 'blue', 'red', 'blue', 'blue', 'blue', 'red', 'red', 'red', 'red', 'red', 'blue', 'blue', 'blue', 'red', 'blue', 'red'];
 
 # Retrieve tweets from text file
 candidate_tweets_json = []
@@ -73,6 +77,23 @@ for count in range(0, len(all_clinton_tweets)):
 for count in range(0, len(clinton_tweets_per_state)):
   print UsaStatesCheck.state_names[count] + '\t' + str(clinton_tweets_per_state[count])
 
+# Stats for number of tweets per day starting from 12/16/2015
+start_date = date(2015, 12, 16)
+clinton_tweets_by_date = [0] * 50
+clinton_tweet_hour = [0]*24
+for count in range(0, len(all_clinton_tweets)):
+  tweet_date_string = all_clinton_tweets[count].created_at
+  tweet_date_components = tweet_date_string.split(' ')
+  tweet_date = date(int(tweet_date_components[5]), MonthNumber.getMonthNumber(tweet_date_components[1]), int(tweet_date_components[2]))
+  days_from_start = tweet_date - start_date
+  clinton_tweets_by_date[days_from_start.days - 1] += 1
+  tweet_time = tweet_date_components[3]
+  clinton_tweet_hour[int(tweet_time[0:2])] += 1
+print "Clinton tweets by date ",
+print clinton_tweets_by_date
+print "Clinton tweets by hour ",
+print clinton_tweet_hour
+
 ###############################################################################################################################
 
 
@@ -132,3 +153,21 @@ for count in range(0, len(all_trump_tweets)):
 for count in range(0, len(trump_tweets_per_state)):
   print UsaStatesCheck.state_names[count] + '\t' + str(trump_tweets_per_state[count])
 
+
+# Stats for number of tweets per day starting from 12/16/2015
+start_date = date(2015, 12, 16)
+trump_tweets_by_date = [0] * 50
+trump_tweet_hour = [0]*24
+
+for count in range(0, len(all_trump_tweets)):
+  tweet_date_string = all_trump_tweets[count].created_at
+  tweet_date_components = tweet_date_string.split(' ')
+  tweet_date = date(int(tweet_date_components[5]), MonthNumber.getMonthNumber(tweet_date_components[1]), int(tweet_date_components[2]))
+  days_from_start = tweet_date - start_date
+  trump_tweets_by_date[days_from_start.days - 1] += 1
+  tweet_time = tweet_date_components[3]
+  trump_tweet_hour[int(tweet_time[0:2])] += 1
+print "Trump tweets by date ",
+print trump_tweets_by_date
+print "Trump tweets by hour ",
+print trump_tweet_hour
